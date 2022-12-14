@@ -1,4 +1,4 @@
-# sfguide-terraform-sample
+# Snowflake - Terraform example
 
 ## Get a Snowflake Trial account
 
@@ -19,7 +19,15 @@ This guide was made with `Terraform v1.3.6`.
 
 If this is different from your current, you can use `tfswitch` to conveniently go from one version to another: https://tfswitch.warrensbox.com/
 
+## Install Terragrunt
+
+```shell
+brew install terragrunt
+```
+
 ## Setup Terraform
+
+This guidance is here purely for convenience, it is likely to go out of date, and when in doubt, [check out the provider page](https://github.com/Snowflake-Labs/terraform-provider-snowflake).
 
 ### Locally (MacOS)
 

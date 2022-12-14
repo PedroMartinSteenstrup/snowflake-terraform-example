@@ -3,3 +3,5 @@
 *.tfstate.*
 
 .idea
+
+snowflake_project/aws/terraform.tfvars
