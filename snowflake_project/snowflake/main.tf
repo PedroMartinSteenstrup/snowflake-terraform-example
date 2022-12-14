@@ -7,8 +7,12 @@ terraform {
   }
 }
 
-module "aws-s3" {
-    source = "../aws/eu-west-2/s3"
+variable "shared" {
+  type = object({
+    # If not specified, will discard any others.
+    project_code  = string
+    region_code = string
+  })
 }
 
 provider "snowflake" {
