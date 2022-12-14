@@ -5,3 +5,5 @@
 .idea
 
 snowflake_project/aws/terraform.tfvars
+snowflake_project/aws/eu-west-2/terraform.tfvars
+snowflake_project/aws/eu-west-2/s3/terraform.tfvars

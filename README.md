@@ -1,10 +1,27 @@
 # Snowflake - Terraform example
 
-## Get a Snowflake Trial account
+## Get Trial accounts
+
+### Snowflake 
+
+Snowflake gives some credit for whoever wishes to tinker with it, and given what we'll set up, it is unlikely to ever reach billing.
 
 https://docs.snowflake.com/en/user-guide/admin-trial-account.html
 
-## Install terraform
+### Amazon
+
+We'll create a few AWS resources, again nothing likely to go over the free tier allowance.
+
+https://aws.amazon.com/free/
+
+If you have an existing account, then make sure the IAM role you'll enter has the permissions to work with S3 buckets. 
+If you have never worked with aws & you're not interested, you can
+- Comment out all code related to external tables and storage integration in Snowflake
+- Or create a free tier and use root keys (no restrictions) 
+
+## Installs
+
+### Terraform
 
 https://developer.hashicorp.com/terraform/downloads
 
@@ -17,9 +34,13 @@ brew install hashicorp/tap/terraform
 
 This guide was made with `Terraform v1.3.6`.
 
-If this is different from your current, you can use `tfswitch` to conveniently go from one version to another: https://tfswitch.warrensbox.com/
+### Tfswitch
 
-## Install Terragrunt
+If this guide is using a different version of terraform than your current deployment, you can use `tfswitch` to conveniently go from one version to another: 
+
+https://tfswitch.warrensbox.com/
+
+### Terragrunt
 
 ```shell
 brew install terragrunt
