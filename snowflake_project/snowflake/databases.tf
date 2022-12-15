@@ -17,3 +17,14 @@ resource "snowflake_database" "db" {
   name     = each.key
   comment  = each.value.comment
 }
+
+resource "snowflake_database" "airbyte" {
+  name     = "AIRBYTE"
+  comment  = "Landing database for all airbyte jobs"
+}
+
+resource "snowflake_database" "snowplow" {
+  provider = snowflake.admin_system
+  name     = "SNOWPLOW"
+  comment  = "Landing database for all snowplow data"
+}

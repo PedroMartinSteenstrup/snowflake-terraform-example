@@ -63,3 +63,25 @@ See file [.snow.env](provisioning/.snow.env)
 ### In Snowflake 
 
 see file [provisioning_user_sf.sql](provisioning/provisioning_user_sf.sql)
+
+
+
+# FAQ 
+
+- Import an existing resource
+
+Test it by creating manually a user (with the right admin user).
+
+![create_user](./resources/screenshots/manual_create_user.png)
+
+Requires creating the wanted configuration first in Terraform:
+```shell
+resource "snowflake_user" "test_import_user" {
+  provider             = snowflake.admin_security
+  # more args
+}
+```
+then it can be imported
+```shell
+terraform import module.snowflake.snowflake_user.test_import_user NAME_OF_USER_IN_SNOWFLAKE
+```
