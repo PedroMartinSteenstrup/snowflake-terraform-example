@@ -46,6 +46,16 @@ resource "snowflake_schema" "marketing_unique" {
   data_retention_days = 0 # disables Time Travel for the specified object
 }
 
+resource "snowflake_schema" "airbyte_landing" {
+  provider = snowflake.admin_system
+
+  database = snowflake_database.airbyte.name
+  name     = "AIRBYTE_LANDING"
+  is_transient        = false
+  is_managed          = true
+  data_retention_days = 0 # disables Time Travel for the specified object
+}
+
 resource "snowflake_tag_association" "schema_association" {
   object_identifier {
     name = snowflake_schema.marketing_unique.name

@@ -1,20 +1,26 @@
-#
-#resource "snowflake_database_grant" "grant" {
-#  provider          = snowflake.security_admin
-#  database_name     = snowflake_database.db.name
-#  privilege         = "USAGE"
-#  roles             = [snowflake_role.role.name]
-#  with_grant_option = false
-#}
-#
-#resource "snowflake_schema_grant" "grant" {
-#  provider          = snowflake.security_admin
-#  database_name     = snowflake_database.db.name
-#  schema_name       = snowflake_schema.schema.name
-#  privilege         = "USAGE"
-#  roles             = [snowflake_role.role.name]
-#  with_grant_option = false
-#}
+# Example how to access a loop in another file to apply one set of
+# roles to several objects at once
+resource "snowflake_database_grant" "grant" {
+  provider = snowflake.admin_security
+
+  for_each          = snowflake_database.db
+  database_name     = each.key
+  privilege         = "USAGE"
+  roles             = [snowflake_role.role["TRANSFORMER"].name]
+  with_grant_option = false
+}
+
+resource "snowflake_schema_grant" "grant" {
+  provider      = snowflake.admin_security
+  database_name = snowflake_database.airbyte.name
+  schema_name   = snowflake_schema.airbyte_landing.name
+  privilege     = "USAGE"
+  roles         = [
+    snowflake_role.role["INGESTER"].name
+  ]
+  with_grant_option = false
+}
+
 #resource "snowflake_warehouse_grant" "grant" {
 #  provider          = snowflake.security_admin
 #  warehouse_name    = snowflake_warehouse.warehouse.name
@@ -22,7 +28,7 @@
 #  roles             = [snowflake_role.role.name]
 #  with_grant_option = false
 #}
-
+#
 #resource "snowflake_role_grants" "grants" {
 #  provider  = snowflake.security_admin
 #  role_name = snowflake_role.role.name

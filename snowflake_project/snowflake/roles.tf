@@ -15,3 +15,9 @@ resource "snowflake_role" "role" {
   name     = each.key
   comment  = each.value.comment
 }
+
+resource "snowflake_role" "custom_role" {
+  provider = snowflake.admin_user
+  name     = "TEST_ROLE"
+  comment  = "Testing direct grant"
+}

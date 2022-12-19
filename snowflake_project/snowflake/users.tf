@@ -26,7 +26,7 @@ variable "email" {
 
 resource "snowflake_user" "sf_tf_dummy_user" {
   provider             = snowflake.admin_security
-  name                 = "dummy"
+  name                 = "DUMMY"
   email                = "dummy_dummy@company.com"
   default_warehouse    = local.defaults.data_analyst.warehouse
   default_role         = local.defaults.data_analyst.role
@@ -37,10 +37,18 @@ resource "snowflake_user" "sf_tf_dummy_user" {
 resource "snowflake_user" "test_import_user" {
   # Used in FAQ section on importing existing resources
   provider             = snowflake.admin_user
-  name                 = "dummy_import"
+  name                 = "DUMMY_IMPORT"
   email                = "dummy_import_dummy@company.com"
   default_warehouse    = local.defaults.data_analyst.warehouse
   default_role         = local.defaults.data_analyst.role
   default_namespace    = local.defaults.data_analyst.namespace
   must_change_password = true
+}
+
+resource "snowflake_role_grants" "data_analyst_role_grant" {
+  provider = snowflake.admin_user
+
+  role_name = local.defaults.data_analyst.role
+  users     = [snowflake_user.test_import_user.name]
+  roles     = [snowflake_role.custom_role.name]
 }
