@@ -24,3 +24,15 @@ provider "aws" {
   region = "eu-west-2"
   profile = var.shared.aws_profile
 }
+
+module "s3" {
+  # this is our main snowflake module
+  source = "./eu-west-2/s3"
+  shared = var.shared
+}
+
+module "roles" {
+  # this is our main snowflake module
+  source = "./eu-west-2/roles"
+  shared = var.shared
+}

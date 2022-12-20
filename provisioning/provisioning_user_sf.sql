@@ -5,13 +5,11 @@ CREATE USER "tf-provisioning"
     DEFAULT_ROLE = PUBLIC -- default role is unprivileged
     MUST_CHANGE_PASSWORD = FALSE;
 
-CREATE USER "tf-provisioning"
-    RSA_PUBLIC_KEY='<your pub key here>'
-    DEFAULT_ROLE=PUBLIC
-    MUST_CHANGE_PASSWORD=FALSE;
 
 --create warehouses, databases, and all database objects
 GRANT ROLE SYSADMIN TO USER "tf-provisioning";
+-- to create the storage_integration
+GRANT CREATE INTEGRATION ON ACCOUNT TO ROLE SYSADMIN;
 
 -- global MANAGE GRANTS privilege to grant or revoke privileges on objects in the account
 GRANT ROLE SECURITYADMIN TO USER "tf-provisioning";

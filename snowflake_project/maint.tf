@@ -13,8 +13,8 @@ locals {
 }
 
 module "aws-s3" {
-  # this is used to generate a bucket we create an external table from
-  source = "./aws/eu-west-2/s3"
+  # this is used to generate a bucket we create the external table from
+  source = "./aws"
   shared = local.shared
 }
 

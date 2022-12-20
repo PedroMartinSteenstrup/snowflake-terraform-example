@@ -20,6 +20,8 @@ resource "snowflake_schema" "schema" {
   database   = each.value.database
   name       = each.key
   is_managed = false
+
+  depends_on = [snowflake_database.db]
 }
 
 resource "snowflake_schema" "tagging_schema" {

@@ -68,7 +68,7 @@ see file [provisioning_user_sf.sql](provisioning/provisioning_user_sf.sql)
 
 # FAQ 
 
-- Import an existing resource
+- **Import an existing resource**
 
 Test it by creating manually a user (with the right admin user).
 
@@ -85,3 +85,19 @@ then it can be imported
 ```shell
 terraform import module.snowflake.snowflake_user.test_import_user NAME_OF_USER_IN_SNOWFLAKE
 ```
+<br>
+
+- **Generate a graph for documentation**
+```shell
+cd snowflake_project
+terraform graph | dot -Tsvg > ../resources/graph.svg
+```
+![terraform_graph](./resources/graph.svg)
+
+<br>
+
+- **Datasets origin**
+
+[datapaper_anonymized.csv.gz](./resources/files/)
+
+Ederer, Florian, and Frédéric Schneider. “Trust and Promises over Time.” American Economic Journal: Microeconomics 14, no. 3 (August 2022): 304–20. https://doi.org/10.1257/mic.20200049.
