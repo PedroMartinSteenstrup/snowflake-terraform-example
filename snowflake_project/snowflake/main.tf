@@ -13,6 +13,7 @@ variable "shared" {
     project_code          = string
     region_code           = string
     aws_profile           = string
+    aws_account_id        = string
     managed_by            = string
     snowflake_account_arn = string
     snowflake_external_id = string
