@@ -67,3 +67,13 @@ resource "snowflake_tag_association" "schema_association" {
   tag_id      = snowflake_tag.mapping.id
   tag_value   = "marketing"
 }
+
+// Snowflake DDL
+resource "snowflake_schema" "schema_external_tables" {
+  database = snowflake_database.snowplow.id
+  name     = upper("${var.shared.project_code}_${var.shared.region_code}_raw_${terraform.workspace}")
+  comment  = "Schema for external tables"
+
+  is_transient = false
+  is_managed   = false
+}
