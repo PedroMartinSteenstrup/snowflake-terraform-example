@@ -22,3 +22,10 @@ resource "aws_s3_bucket_public_access_block" "stage_bucket_load_access_block" {
   ignore_public_acls      = true
   restrict_public_buckets = true
 }
+
+resource "aws_s3_object" "upload_external_stage_file" {
+  bucket = aws_s3_bucket.snowflake_landing.id
+  key      = "test/datapaper_anonymized.csv.gz"
+  source   = "${path.root}/../resources/files/datapaper_anonymized.csv.gz"
+  etag     = filemd5("${path.root}/../resources/files/datapaper_anonymized.csv.gz")
+}

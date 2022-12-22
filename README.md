@@ -93,6 +93,12 @@ cd snowflake_project
 terraform graph | dot -Tsvg > ../resources/graph.svg
 ```
 ![terraform_graph](./resources/graph.svg)
+<br>
+
+- **Gotchas**
+
+1. There is no remote backend defined, because this is a playground.
+2. It expects a terraform.tfvars file at the root of `terraform` folder to store the few variables reused in the project that have nothing to do with the infrastructure itself. You can find an example file with the necessary variables [here](resources/files/terraform.tfvars.example)
 
 <br>
 
