@@ -5,8 +5,8 @@ resource "aws_iam_role" "role_for_snowflake_load" {
   description        = "AWS role for Snowflake"
   assume_role_policy = templatefile("${path.root}/aws/policies/snowflake_load_trust_policy.json",
     {
-      snowflake_account_arn = var.shared.snowflake_account_arn
-      snowflake_external_id = var.shared.snowflake_external_id
+      snowflake_account_arn = var.snowflake_account_arn
+      snowflake_external_id = var.snowflake_external_id
     })
   tags = {
     Project   = upper(var.shared.project_code)

@@ -40,7 +40,7 @@ resource "snowflake_schema" "tagging_schema" {
 resource "snowflake_schema" "marketing_unique" {
   provider = snowflake.admin_system
 
-  database = "STAGE"
+  database = snowflake_database.db["STAGE"].name
   name     = "MARKETING_FAIRY"
 
   is_transient        = false

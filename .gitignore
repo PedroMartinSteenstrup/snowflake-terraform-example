@@ -4,4 +4,4 @@
 
 .idea
 
-snowflake_project/terraform.tfvars
+terraform/terraform.tfvars

@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "snowflake_landing" {
-  bucket = "${var.shared.project_code}-${var.shared.region_code}-snowplow-s3-integration"
+  bucket        = "${var.shared.project_code}-${var.shared.region_code}-snowplow-s3-integration"
+  force_destroy = true
 }
 
 resource "aws_s3_bucket_acl" "snowflake-landing-example" {

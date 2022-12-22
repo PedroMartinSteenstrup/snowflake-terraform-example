@@ -17,3 +17,7 @@ output "storage_aws_external_id" {
 output "storage_aws_iam_user_arn" {
   value  = module.snowflake.storage_aws_iam_user_arn
 }
+
+output "external_stage" {
+  value = module.snowflake.external_stage
+}

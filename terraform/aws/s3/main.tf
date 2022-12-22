@@ -14,8 +14,6 @@ variable "shared" {
     region_code           = string
     aws_profile           = string
     managed_by            = string
-    snowflake_account_arn = string
-    snowflake_external_id = string
   })
 }
 

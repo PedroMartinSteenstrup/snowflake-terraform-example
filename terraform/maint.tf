@@ -7,8 +7,6 @@ locals {
     region_code           = var.region_code
     aws_account_id        = var.aws_account_id
     managed_by            = var.managed_by
-    snowflake_account_arn = var.snowflake_account_arn
-    snowflake_external_id = var.snowflake_external_id
   }
 }
 
@@ -16,6 +14,8 @@ module "aws-s3" {
   # this is used to generate a bucket we create the external table from
   source = "./aws"
   shared = local.shared
+  snowflake_account_arn = module.snowflake.storage_aws_iam_user_arn
+  snowflake_external_id = module.snowflake.storage_aws_external_id
 }
 
 module "snowflake" {
