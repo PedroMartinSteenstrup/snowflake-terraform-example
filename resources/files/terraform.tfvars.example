@@ -3,7 +3,7 @@ aws_region = "eu-west-2"
 
 # To use as prefix when naming AWS resources.
 project_code               = "trial"
-region_code                = "london" # short code for ap-southeast-2
+region_code                = "london" # or any short code
 
 aws_account_id             = "12345678910"
 managed_by                 = "Platform" #owner of resource
