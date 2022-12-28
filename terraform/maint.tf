@@ -12,7 +12,15 @@ locals {
 
 module "aws-s3" {
   # this is used to generate a bucket we create the external table from
-  source = "./aws"
+  source = "./aws_s3"
+  shared = local.shared
+  snowflake_account_arn = module.snowflake.storage_aws_iam_user_arn
+  snowflake_external_id = module.snowflake.storage_aws_external_id
+}
+
+module "aws-roles" {
+  # this is used to generate a bucket we create the external table from
+  source = "./aws_roles"
   shared = local.shared
   snowflake_account_arn = module.snowflake.storage_aws_iam_user_arn
   snowflake_external_id = module.snowflake.storage_aws_external_id

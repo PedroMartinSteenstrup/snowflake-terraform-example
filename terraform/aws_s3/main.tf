@@ -1,3 +1,12 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
 resource "aws_s3_bucket" "snowflake_landing" {
   bucket        = "${var.shared.project_code}-${var.shared.region_code}-snowplow-s3-integration"
   force_destroy = true

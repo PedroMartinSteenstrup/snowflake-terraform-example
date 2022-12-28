@@ -1,9 +1,18 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.0"
+    }
+  }
+}
+
 // Template file for Snowflake to assume the AWS role
 // AWS Role with assume role policy
 resource "aws_iam_role" "role_for_snowflake_load" {
   name               = "${var.shared.region_code}-snowflake-role-${terraform.workspace}"
   description        = "AWS role for Snowflake"
-  assume_role_policy = templatefile("${path.root}/aws/policies/snowflake_load_trust_policy.json",
+  assume_role_policy = templatefile("${path.root}/aws_policies/snowflake_load_trust_policy.json",
     {
       snowflake_account_arn = var.snowflake_account_arn
       snowflake_external_id = var.snowflake_external_id
@@ -19,7 +28,7 @@ resource "aws_iam_role" "role_for_snowflake_load" {
 resource "aws_iam_policy" "snowflake_load_policy" {
   name        = "${var.shared.region_code}-snowflake-access-${terraform.workspace}"
   description = "Allow authorised snowflake users to list files, read from S3 bucket."
-  policy      = templatefile("${path.root}/aws/policies/snowflake_load_policy.json",
+  policy      = templatefile("${path.root}/aws_policies/snowflake_load_policy.json",
     {
       bucket_name = "${var.shared.project_code}-${var.shared.region_code}-snowplow-s3-integration"
     }
