@@ -68,26 +68,26 @@ see file [provisioning_user_sf.sql](provisioning/provisioning_user_sf.sql)
 
 # FAQ 
 
-- **Import an existing resource**
+### **Import an existing resource**
 
-Test it by creating manually a user (with the right admin user).
+You can test imports by creating manually a Snowflake user in the console. Remember to use the right admin user (the same one that terraform will use to manage users).
 
 ![create_user](./resources/screenshots/manual_create_user.png)
 
-Requires creating the wanted configuration first in Terraform:
+Then it requires creating the relevant configuration first in Terraform:
 ```shell
 resource "snowflake_user" "test_import_user" {
   provider             = snowflake.admin_security
-  # more args
+  # more properties of the user you created
 }
 ```
-then it can be imported
+then it can be imported and placed under terraform management
 ```shell
 terraform import module.snowflake.snowflake_user.test_import_user NAME_OF_USER_IN_SNOWFLAKE
 ```
 <br>
 
-- **Generate a graph for documentation**
+### **Generate a graph for documentation**
 ```shell
 cd snowflake_project
 terraform graph | dot -Tsvg > ../resources/graph.svg
@@ -95,15 +95,13 @@ terraform graph | dot -Tsvg > ../resources/graph.svg
 ![terraform_graph](./resources/graph.svg)
 <br>
 
-- **Gotchas**
+### **Gotchas**
 
 1. There is no remote backend defined, because this is a playground.
 2. It expects a terraform.tfvars file at the root of `terraform` folder to store the few variables reused in the project that have nothing to do with the infrastructure itself. You can find an example file with the necessary variables [here](resources/files/terraform.tfvars.example)
 
 <br>
 
-- **Datasets origin**
+### **Datasets origin**
 
-[datapaper_anonymized.csv.gz](./resources/files/)
-
-Ederer, Florian, and Frédéric Schneider. “Trust and Promises over Time.” American Economic Journal: Microeconomics 14, no. 3 (August 2022): 304–20. https://doi.org/10.1257/mic.20200049.
+[datapaper_anonymized.csv.gz](./resources/files/), Ederer, Florian, and Frédéric Schneider. “Trust and Promises over Time.” American Economic Journal: Microeconomics 14, no. 3 (August 2022): 304–20. https://doi.org/10.1257/mic.20200049.

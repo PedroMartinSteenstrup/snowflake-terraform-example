@@ -41,7 +41,8 @@ resource "snowflake_file_format" "snowplow_json" {
   schema      = "PUBLIC"
   format_type = "JSON"
 
-  null_if       = []
-  compression   = "AUTO"
-  binary_format = "HEX"
+  null_if          = []
+  compression      = "AUTO"
+  binary_format    = "HEX"
+  timestamp_format = "YYYY-MM-DD HH24:MI:SS.FF9"
 }

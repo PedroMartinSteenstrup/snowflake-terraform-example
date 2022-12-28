@@ -32,9 +32,9 @@ resource "snowflake_schema" "tagging_schema" {
   name     = "TAG_SCHEMA"
   comment  = "This is a test schema to contain tagging objects"
 
-  is_transient        = false
-  is_managed          = true
-  data_retention_days = 0 # disables Time Travel for the specified object
+  is_transient = false
+  is_managed   = true
+  #  data_retention_days = 1 # un-specifying it disables Time Travel for the specified object
 }
 
 resource "snowflake_schema" "marketing_unique" {
@@ -43,24 +43,24 @@ resource "snowflake_schema" "marketing_unique" {
   database = snowflake_database.db["STAGE"].name
   name     = "MARKETING_FAIRY"
 
-  is_transient        = false
-  is_managed          = true
-  data_retention_days = 0 # disables Time Travel for the specified object
+  is_transient = false
+  is_managed   = true
+  #  data_retention_days = 1 # un-specifying it disables Time Travel for the specified object
 }
 
 resource "snowflake_schema" "airbyte_landing" {
   provider = snowflake.admin_system
 
-  database = snowflake_database.airbyte.name
-  name     = "AIRBYTE_LANDING"
-  is_transient        = false
-  is_managed          = true
-  data_retention_days = 0 # disables Time Travel for the specified object
+  database     = snowflake_database.airbyte.name
+  name         = "AIRBYTE_LANDING"
+  is_transient = false
+  is_managed   = true
+  #  data_retention_days = 1 # un-specifying it disables Time Travel for the specified object
 }
 
 resource "snowflake_tag_association" "schema_association" {
   object_identifier {
-    name = snowflake_schema.marketing_unique.name
+    name     = snowflake_schema.marketing_unique.name
     database = snowflake_schema.marketing_unique.database
   }
   object_type = "SCHEMA"
