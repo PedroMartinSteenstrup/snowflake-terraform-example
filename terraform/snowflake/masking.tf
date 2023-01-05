@@ -17,7 +17,7 @@ resource "snowflake_schema_grant" "grant_schema_for_masking" {
   schema_name   = "PUBLIC"
 
   privilege = "USAGE"
-  roles = [
+  roles     = [
     "SECURITYADMIN"
   ]
   with_grant_option = false
@@ -30,7 +30,7 @@ resource "snowflake_schema_grant" "create_mask_in_public" {
   schema_name   = "PUBLIC"
 
   privilege = "CREATE MASKING POLICY"
-  roles = [
+  roles     = [
     "SECURITYADMIN"
   ]
   with_grant_option = false
@@ -43,9 +43,9 @@ resource "snowflake_masking_policy" "PII_masking_policy" {
   name               = "PII_MASK"
   database           = each.value.database_name
   schema             = each.value.schema_name
-  value_data_type    = "varchar"
+  value_data_type    = "VARCHAR(16777216)"
   masking_expression = "case when ARRAY_CONTAINS('PII_DATA'::VARIANT,parse_json(current_available_roles())) then val else '********' end"
-  return_data_type   = "varchar"
+  return_data_type   = "VARCHAR"
 }
 
 resource "snowflake_masking_policy" "PII_variant_masking_policy" {
@@ -58,4 +58,32 @@ resource "snowflake_masking_policy" "PII_variant_masking_policy" {
   value_data_type    = "VARIANT"
   masking_expression = "case when ARRAY_CONTAINS('PII_DATA'::VARIANT,parse_json(current_available_roles())) then val else NULL end"
   return_data_type   = "VARIANT"
+}
+
+resource "snowflake_masking_policy_grant" "pii_masking_policy" {
+  provider = snowflake.admin_security
+  for_each = snowflake_masking_policy.PII_masking_policy
+
+  masking_policy_name = each.value.name
+  database_name       = each.value.database
+  schema_name         = each.value.schema
+  with_grant_option   = false
+  privilege           = "APPLY"
+  roles               = [
+    "INGESTER", "TRANSFORMER"
+  ]
+}
+
+resource "snowflake_masking_policy_grant" "pii_variant_masking_policy" {
+  provider = snowflake.admin_security
+  for_each = snowflake_masking_policy.PII_variant_masking_policy
+
+  masking_policy_name = each.value.name
+  database_name       = each.value.database
+  schema_name         = each.value.schema
+  with_grant_option   = false
+  privilege           = "APPLY"
+  roles               = [
+    "INGESTER", "TRANSFORMER"
+  ]
 }
