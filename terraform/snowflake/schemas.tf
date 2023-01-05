@@ -70,10 +70,11 @@ resource "snowflake_tag_association" "schema_association" {
 
 // Snowflake DDL
 resource "snowflake_schema" "schema_external_tables" {
+  provider = snowflake.admin_system
   database = snowflake_database.snowplow.id
   name     = upper("${var.shared.project_code}_${var.shared.region_code}_raw_${terraform.workspace}")
   comment  = "Schema for external tables"
 
   is_transient = false
-  is_managed   = false
+  is_managed   = true
 }

@@ -21,3 +21,9 @@ resource "snowflake_role" "custom_role" {
   name     = "TEST_ROLE"
   comment  = "Testing direct grant"
 }
+
+resource "snowflake_role" "stage_ownership" {
+  provider = snowflake.admin_user
+  name     = "STAGE_ROLE"
+  comment  = "Testing direct grant"
+}

@@ -13,12 +13,14 @@ locals {
 }
 
 resource "snowflake_database" "db" {
+  provider = snowflake.admin_system
   for_each = local.databases
   name     = each.key
   comment  = each.value.comment
 }
 
 resource "snowflake_database" "airbyte" {
+  provider = snowflake.admin_system
   name     = "AIRBYTE"
   comment  = "Landing database for all airbyte jobs"
 }
