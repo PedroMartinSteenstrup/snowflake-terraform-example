@@ -5,3 +5,4 @@
 .idea
 
 terraform/terraform.tfvars
+terragrunt/terraform.tfvars
